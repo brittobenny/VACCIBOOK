@@ -1,0 +1,185 @@
+<?php
+// Simple Certificate Generator using HTML
+class CertificateGenerator {
+    
+    public function generateCertificate($bookingData, $childData, $vaccineData, $healthCentreData) {
+        // Create certificate filename
+        $filename = "certificate_" . $bookingData['bid'] . "_" . date('Ymd') . ".html";
+        $filepath = "../uploads/certificates/" . $filename;
+        
+        // Ensure directory exists
+        if (!file_exists("../uploads/certificates/")) {
+            mkdir("../uploads/certificates/", 0777, true);
+        }
+        
+        // Create HTML for certificate
+        $html = $this->getCertificateHTML($bookingData, $childData, $vaccineData, $healthCentreData);
+        
+        // Save as HTML (can be converted to PDF using browser print or wkhtmltopdf)
+        file_put_contents($filepath, $html);
+        
+        return $filename;
+    }
+    
+    private function getCertificateHTML($booking, $child, $vaccine, $healthCentre) {
+        $certificateNumber = "VC-" . str_pad($booking['bid'], 6, '0', STR_PAD_LEFT);
+        $childName = strtoupper($child['cname']);
+        $vaccineName = $vaccine['vname'];
+        $dateAdministered = date('d F Y', strtotime($booking['schedule_date']));
+        $healthCentreName = $healthCentre['hname'];
+        $location = $healthCentre['loc'];
+        
+        return <<<HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vaccination Certificate</title>
+    <style>
+        @page { margin: 0; }
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .certificate {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            border: 20px solid #1a237e;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 48px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 42px;
+            color: #1a237e;
+            font-weight: bold;
+            margin: 20px 0;
+            letter-spacing: 3px;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .content {
+            text-align: center;
+            line-height: 2;
+            font-size: 18px;
+            color: #333;
+        }
+        .name {
+            font-size: 32px;
+            color: #1a237e;
+            font-weight: bold;
+            margin: 20px 0;
+            text-decoration: underline;
+        }
+        .vaccine-info {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 30px 0;
+            border-left: 5px solid #1a237e;
+        }
+        .vaccine-info p {
+            margin: 10px 0;
+            text-align: left;
+        }
+        .footer {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .signature {
+            text-align: center;
+        }
+        .signature-line {
+            border-top: 2px solid #333;
+            width: 200px;
+            margin: 10px auto;
+        }
+        .cert-number {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+        .seal {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #1a237e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1a237e;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <div class="header">
+            <div class="logo">💉</div>
+            <div class="title">VACCINATION CERTIFICATE</div>
+            <div class="subtitle">This is to certify that</div>
+        </div>
+        
+        <div class="content">
+            <div class="name">{$childName}</div>
+            
+            <p>has been successfully vaccinated with</p>
+            
+            <div class="vaccine-info">
+                <p><strong>Vaccine Name:</strong> {$vaccineName}</p>
+                <p><strong>Date of Administration:</strong> {$dateAdministered}</p>
+                <p><strong>Health Centre:</strong> {$healthCentreName}</p>
+                <p><strong>Location:</strong> {$location}</p>
+            </div>
+            
+            <p>This certificate is issued as proof of vaccination.</p>
+        </div>
+        
+        <div class="footer">
+            <div class="signature">
+                <div class="signature-line"></div>
+                <p><strong>Authorized Signature</strong></p>
+                <p style="font-size: 14px;">{$healthCentreName}</p>
+            </div>
+            
+            <div class="seal">
+                <div>OFFICIAL<br>SEAL</div>
+            </div>
+            
+            <div class="signature">
+                <div class="signature-line"></div>
+                <p><strong>Date of Issue</strong></p>
+                <p style="font-size: 14px;">{$dateAdministered}</p>
+            </div>
+        </div>
+        
+        <div class="cert-number">
+            <p><strong>Certificate Number:</strong> {$certificateNumber}</p>
+            <p style="font-size: 12px;">This is a computer-generated certificate</p>
+        </div>
+    </div>
+</body>
+</html>
+HTML;
+    }
+}
+?>

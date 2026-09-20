@@ -1,0 +1,483 @@
+/* ========================================
+   MODERN THEME FOR PARENT MODULE
+   Enhanced Modern Design with Gradients & Animations
+   ======================================== */
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    --secondary-gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    --blue-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    --light-blue-gradient: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+    --accent-gradient: linear-gradient(135deg, #60a5fa 0%, #38bdf8 100%);
+    
+    --primary-color: #1e3a8a;
+    --secondary-color: #3b82f6;
+    --accent-color: #06b6d4;
+    
+    --text-dark: #2d3748;
+    --text-light: #718096;
+    --bg-light: #f7fafc;
+    --card-bg: #ffffff;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.15);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+}
+
+/* ========================================
+   GLOBAL ENHANCEMENTS
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   MODERN CARD STYLES
+   ======================================== */
+
+.modern-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.modern-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.modern-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* ========================================
+   GLASSMORPHISM EFFECTS
+   ======================================== */
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   MODERN BUTTONS
+   ======================================== */
+
+.btn-modern {
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-modern::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-modern:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-gradient {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.btn-gradient:hover {
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-outline-modern {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-modern:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ========================================
+   ENHANCED FORM INPUTS
+   ======================================== */
+
+.modern-input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.modern-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+.modern-input::placeholder {
+    color: #a0aec0;
+}
+
+/* ========================================
+   MODERN TABLE STYLES
+   ======================================== */
+
+.modern-table {
+    width: 100%;
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.modern-table thead {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.modern-table thead th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.modern-table tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+    transition: background 0.2s ease;
+}
+
+.modern-table tbody tr:hover {
+    background: #f7fafc;
+}
+
+.modern-table tbody td {
+    padding: 14px 16px;
+    color: var(--text-dark);
+}
+
+/* ========================================
+   BADGE STYLES
+   ======================================== */
+
+.badge-modern {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    color: #0a5f4f;
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    color: #8b4513;
+}
+
+.badge-danger {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    color: #b91c1c;
+}
+
+.badge-info {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    color: #0c4a6e;
+}
+
+/* ========================================
+   LOADING ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.scale-in {
+    animation: scaleIn 0.4s ease-out;
+}
+
+/* ========================================
+   MODERN GRADIENT BACKGROUNDS
+   ======================================== */
+
+.gradient-purple {
+    background: var(--primary-gradient);
+}
+
+.gradient-blue {
+    background: var(--blue-gradient);
+}
+
+.gradient-green {
+    background: var(--green-gradient);
+}
+
+.gradient-orange {
+    background: var(--orange-gradient);
+}
+
+/* ========================================
+   ICON ENHANCEMENTS
+   ======================================== */
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.icon-box:hover {
+    transform: rotate(5deg) scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* ========================================
+   STAT CARDS
+   ======================================== */
+
+.stat-card-modern {
+    background: white;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-gradient);
+}
+
+.stat-card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.stat-number-modern {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label-modern {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+/* ========================================
+   PROGRESS BARS
+   ======================================== */
+
+.progress-modern {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-modern {
+    height: 100%;
+    background: var(--primary-gradient);
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+/* ========================================
+   TOOLTIP STYLES
+   ======================================== */
+
+.tooltip-modern {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-modern::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    background: #1a202c;
+    color: white;
+    font-size: 0.85rem;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.tooltip-modern:hover::after {
+    opacity: 1;
+}
+
+/* ========================================
+   RESPONSIVE UTILITIES
+   ======================================== */
+
+@media (max-width: 768px) {
+    .modern-card {
+        margin: 10px;
+    }
+    
+    .btn-modern {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ========================================
+   SCROLL TO TOP BUTTON
+   ======================================== */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
